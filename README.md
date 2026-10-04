@@ -177,15 +177,4 @@ python -c "from sentinelrag.graph import run_query; result=run_query('smoke test
 - Wikipedia, arXiv, and Tavily may impose rate limits or return incomplete results.
 - There is no benchmark suite or production-grade evaluation dataset included in the repository.
 
-## Resume-Ready Description
 
-**SentinelRAG | Multi-Source Research and Claim Verification System**
-
-- Built a LangGraph-based RAG pipeline that decomposes research questions, retrieves evidence from web, Wikipedia, arXiv, and uploaded PDFs, and generates citation-grounded answers with Groq.
-- Implemented local PDF semantic search using Sentence Transformers, overlapping text chunking, and FAISS inner-product indexing.
-- Added sentence-level provenance verification with an NLI cross-encoder, including faithfulness scoring, uncited/source-not-found detection, and cross-source conflict reporting.
-- Developed a Gradio interface with source selection, multi-file PDF upload, claim verification, evidence previews, and verification tables.
-
-## License
-
-No license file is currently included. Add a license before distributing the project publicly.
