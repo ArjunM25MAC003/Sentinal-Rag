@@ -1,0 +1,46 @@
+# ──────────────────────────────────────────────────────────────
+# SentinelRAG Dependencies
+# ──────────────────────────────────────────────────────────────
+
+# Agent orchestration
+langgraph>=0.2.0
+langchain-core>=0.3.0
+
+# LLM provider (free tier at https://console.groq.com)
+groq>=0.11.0
+
+# Web search (free 1000 req/month at https://tavily.com)
+tavily-python>=0.5.0
+
+# Wikipedia API
+wikipedia>=1.4.0
+
+# arXiv paper search
+arxiv>=2.1.0
+
+# Embeddings & NLI cross-encoder
+sentence-transformers>=3.0.0
+
+# Vector store for PDF semantic search
+faiss-cpu>=1.8.0
+
+# Sentence tokenisation
+nltk>=3.9.0
+
+# Gradio UI
+gradio>=5.0.0
+
+# PDF text extraction
+PyMuPDF>=1.24.0
+
+# Environment variable management
+python-dotenv>=1.0.0
+
+# Numerical computing
+numpy>=1.26.0
+
+# Data formatting in the UI
+pandas>=2.1.0
+
+# HTTP requests
+requests>=2.31.0
