@@ -1,5 +1,5 @@
 """
-🛡️ SentinelRAG — Multi-Source Research Agent with Claim Provenance
+ SentinelRAG — Multi-Source Research Agent with Claim Provenance
 ===================================================================
 
 Main Gradio application with two tabs:
@@ -86,11 +86,11 @@ _SOURCE_MAP = {
 def _faithfulness_badge(score: float) -> str:
     """Return an HTML badge coloured by faithfulness score."""
     if score >= 0.70:
-        colour, emoji = "#22c55e", "🟢"      # green
+        colour, emoji = "#22c55e",       # green
     elif score >= 0.50:
-        colour, emoji = "#eab308", "🟡"      # yellow
+        colour, emoji = "#eab308",      # yellow
     else:
-        colour, emoji = "#ef4444", "🔴"      # red
+        colour, emoji = "#ef4444",       # red
 
     return f"""
     <div style="display:flex; align-items:center; justify-content:center; padding:12px;">
@@ -105,13 +105,13 @@ def _faithfulness_badge(score: float) -> str:
 def _verdict_badge(verdict: str) -> str:
     """Map a verdict string to an emoji-prefixed label."""
     return {
-        "VERIFIED":           "✅ VERIFIED",
-        "VERIFIED_ALTERNATE": "✅ VERIFIED (alt source)",
-        "UNCERTAIN":          "⚠️ UNCERTAIN",
-        "CONTRADICTED":       "❌ CONTRADICTED",
-        "UNCITED":            "📝 UNCITED",
-        "SOURCE_NOT_FOUND":   "❓ SOURCE NOT FOUND",
-    }.get(verdict, f"❓ {verdict}")
+        "VERIFIED":           "VERIFIED",
+        "VERIFIED_ALTERNATE": "VERIFIED (alt source)",
+        "UNCERTAIN":          "UNCERTAIN",
+        "CONTRADICTED":       "CONTRADICTED",
+        "UNCITED":            "UNCITED",
+        "SOURCE_NOT_FOUND":   " SOURCE NOT FOUND",
+    }.get(verdict, f" {verdict}")
 
 
 def _verdict_html(verdict: str, score: float) -> str:
@@ -151,7 +151,7 @@ def research(question: str, pdf_files, sources: list, progress=gr.Progress()):
     """
     if not question or not question.strip():
         return (
-            "⚠️ Please enter a research question.",
+            "Please enter a research question.",
             "", pd.DataFrame(), "", "",
         )
 
@@ -211,13 +211,13 @@ def research(question: str, pdf_files, sources: list, progress=gr.Progress()):
             for i, c in enumerate(conflicts, 1):
                 conflict_lines.append(
                     f"**Conflict {i}:** {c.get('claim', 'N/A')}\n"
-                    f"- ❌ Contradicted by: `[{c.get('contradicting_source', '?')}]`\n"
-                    f"- ✅ Supported by: `[{c.get('supporting_source', '?')}]`\n"
+                    f"-  Contradicted by: `[{c.get('contradicting_source', '?')}]`\n"
+                    f"-  Supported by: `[{c.get('supporting_source', '?')}]`\n"
                     f"- {c.get('note', '')}\n"
                 )
             conflicts_md = "\n".join(conflict_lines)
         else:
-            conflicts_md = "✅ No conflicts detected across sources."
+            conflicts_md = " No conflicts detected across sources."
 
         # ── 8. Source details accordion ────────────────────────────
         all_sources = result.get("all_sources", [])
@@ -323,7 +323,7 @@ with gr.Blocks(
 
     # ── Header ─────────────────────────────────────────────────────
     gr.Markdown(
-        "# 🛡️ SentinelRAG — Multi-Source Research Agent\n"
+        "#  SentinelRAG — Multi-Source Research Agent\n"
         "Queries **Web + Wikipedia + arXiv + PDFs** in parallel, then verifies "
         "every output sentence against its exact source using NLI cross-encoder "
         "verification. Conflicts between sources are automatically detected."
@@ -333,7 +333,7 @@ with gr.Blocks(
         # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
         # TAB 1 — Research Agent
         # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        with gr.Tab("🔍 Research Agent"):
+        with gr.Tab(" Research Agent"):
             with gr.Row():
                 # ── Left column: inputs ────────────────────────────
                 with gr.Column(scale=2):
@@ -359,7 +359,7 @@ with gr.Blocks(
                         )
 
                     submit_btn = gr.Button(
-                        "🚀 Generate Research Report", variant="primary", size="lg"
+                        " Generate Research Report", variant="primary", size="lg"
                     )
 
                     gr.Examples(
@@ -391,10 +391,10 @@ with gr.Blocks(
                             wrap=True,
                         )
 
-                    with gr.Accordion("⚠️ Detected Conflicts", open=False):
+                    with gr.Accordion(" Detected Conflicts", open=False):
                         conflicts_output = gr.Markdown()
 
-                    with gr.Accordion("📚 Source Details", open=False):
+                    with gr.Accordion(" Source Details", open=False):
                         sources_output = gr.Markdown()
 
             submit_btn.click(
@@ -412,7 +412,7 @@ with gr.Blocks(
         # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
         # TAB 2 — Claim Verifier
         # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        with gr.Tab("✅ Claim Verifier"):
+        with gr.Tab(" Claim Verifier"):
             gr.Markdown(
                 "Paste any source text and a claim — the NLI model will tell you "
                 "whether the claim is **supported**, **contradicted**, or **uncertain** "
